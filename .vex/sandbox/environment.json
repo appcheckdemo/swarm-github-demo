@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "defaultProfile": "python",
+  "profiles": {
+    "python": {
+      "build": { "dockerfile": "Dockerfile", "context": "." },
+      "machine": { "class": "standard-8gb" },
+      "env": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "install": [
+        { "run": "python3 --version", "timeoutSeconds": 60 }
+      ],
+      "checks": {
+        "test": "python3 -m compileall -q pack"
+      },
+      "network": { "policy": "open" },
+      "docker": { "enabled": false }
+    }
+  }
+}
