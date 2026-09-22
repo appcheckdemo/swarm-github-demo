@@ -1,0 +1,1 @@
+pub fn fetch(url:&str)->Result<Vec<u8>,String>{ if let Some(path)=url.strip_prefix("file://"){return crate::resources::load(path)} Err(format!("HTTP fetching is unavailable in this baseline: {url}")) }

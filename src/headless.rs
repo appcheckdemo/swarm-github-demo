@@ -1,0 +1,2 @@
+use crate::browser::Browser; use image::{ImageBuffer,Rgba};
+pub fn render(source:&str,output:&str)->Result<(),String>{let b=Browser::load(source,crate::model::Size{width:800,height:600})?; let pixels=b.framebuffer(); let mut im=ImageBuffer::<Rgba<u8>,_>::new(800,600); for (i,p) in pixels.iter().enumerate(){im.put_pixel((i%800)as u32,(i/800)as u32,Rgba([(*p>>16)as u8,(*p>>8)as u8,*p as u8,255]))} im.save(output).map_err(|e|e.to_string())}

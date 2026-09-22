@@ -1,0 +1,21 @@
+[package]
+name = "native-browser"
+version = "0.1.0"
+edition = "2021"
+description = "A small native Rust browser vertical slice"
+
+[lib]
+name = "native_browser"
+path = "src/lib.rs"
+
+[[bin]]
+name = "native-browser"
+path = "src/main.rs"
+
+[dependencies]
+image = { version = "0.24", default-features = true, features = ["png"] }
+minifb = "0.25"
+url = "2.5"
+
+[dev-dependencies]
+tempfile = "3"
