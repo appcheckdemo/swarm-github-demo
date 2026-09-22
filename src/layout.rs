@@ -1,0 +1,2 @@
+//! Converts DOM into a simple vertical display list.
+use crate::model::*; pub fn layout(d:&Document,w:u32)->DisplayList{let mut o=DisplayList::default();let mut y=0;fn walk(n:&Node,o:&mut DisplayList,y:&mut u32,w:u32){if let NodeKind::Element(name)=&n.kind{if name!="document"{let h=if name.starts_with('h'){32}else{24};o.items.push(DisplayItem{rect:Rect{x:8,y:*y,width:w.saturating_sub(16),height:h},color:if name.starts_with('h'){[35,75,130,255]}else{[70,70,70,255]},text:Some(n.text())});*y+=h+8}}for c in &n.children{walk(c,o,y,w)}}walk(&d.root,&mut o,&mut y,w);o}

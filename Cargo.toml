@@ -1,0 +1,14 @@
+[package]
+name = "native_browser"
+version = "0.1.0"
+edition = "2021"
+description = "A small, native Rust browser foundation"
+[dependencies]
+image = { version = "0.25", default-features = false, features = ["png"] }
+minifb = "0.27"
+url = "2"
+[lib]
+path = "src/lib.rs"
+[[bin]]
+name = "native-browser"
+path = "src/main.rs"
