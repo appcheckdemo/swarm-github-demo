@@ -1,0 +1,2 @@
+# Build and run
+On Linux install Rust stable, Cargo, a C toolchain, pkg-config, and the desktop libraries required by the renderer. Run `cargo build` and `cargo test` at the repository root. For headless CI use a virtual display such as `xvfb-run -a cargo test`; install fonts as needed. Serve fixtures with `python3 -m http.server 8000 --directory fixtures` for relative resources. Distribution package names and backend requirements vary; use Cargo errors and project documentation to resolve exact versions.
