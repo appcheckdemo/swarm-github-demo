@@ -1,0 +1,14 @@
+[package]
+name = "native-browser"
+version = "0.1.0"
+edition = "2021"
+description = "A small, dependency-free native browser architecture"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "native-browser"
+path = "src/main.rs"
+
+[dependencies]
