@@ -1,0 +1,1 @@
+<!doctype html><html><body><h1>Failure recovery</h1><button id="fail">Trigger failure</button><output id="result"></output><script>document.getElementById('fail').addEventListener('click',function(){try{throw new Error('intentional action failure');}catch(error){document.getElementById('result').textContent='Recovered: '+error.message;}});</script></body></html>

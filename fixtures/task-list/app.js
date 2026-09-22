@@ -1,0 +1,9 @@
+(function () {
+  var state = { tasks: [], filter: 'all' };
+  var list = document.getElementById('tasks'), form = document.getElementById('task-form'), input = document.getElementById('task-input'), status = document.getElementById('status');
+  function visible(task) { return state.filter === 'all' || (state.filter === 'done' ? task.done : !task.done); }
+  function render() { list.innerHTML = ''; state.tasks.forEach(function (task) { if (!visible(task)) return; var li = document.createElement('li'), check = document.createElement('input'); check.type = 'checkbox'; check.checked = task.done; check.addEventListener('change', function () { task.done = check.checked; render(); }); var text = document.createElement('span'); text.textContent = task.title; if (task.done) text.className = 'done'; var remove = document.createElement('button'); remove.textContent = 'Remove'; remove.addEventListener('click', function () { state.tasks = state.tasks.filter(function (item) { return item !== task; }); render(); }); li.appendChild(check); li.appendChild(text); li.appendChild(remove); list.appendChild(li); }); status.textContent = state.tasks.length + ' task(s)'; }
+  form.addEventListener('submit', function (event) { event.preventDefault(); state.tasks.push({ title: input.value, done: false }); input.value = ''; render(); });
+  document.querySelectorAll('[data-filter]').forEach(function (button) { button.addEventListener('click', function () { state.filter = button.getAttribute('data-filter'); render(); }); });
+  fetch('./tasks.json').then(function (response) { if (!response.ok) throw new Error('tasks.json: ' + response.status); return response.json(); }).then(function (items) { state.tasks = items; render(); }).catch(function (error) { status.textContent = 'Could not load tasks: ' + error.message; render(); });
+}());
